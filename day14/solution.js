@@ -1,3 +1,4 @@
+fs = require('fs');
 
 function maskAsNumber(str) {
   let mask = 0;
