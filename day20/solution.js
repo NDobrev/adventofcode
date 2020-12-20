@@ -134,15 +134,11 @@ function copy(where, dh, dv, tile, sh, sv, size) {
 }
 
 function horizontalMatch(left, right) {
-    let re = rightEdge(left);
-    let le = leftEdge(right);
-    return re.join('') == le.join('');
+    return rightEdge(left).join('') == leftEdge(right).join('');
 }
 
 function vecticalMatch(top, bot) {
-    let be = botEdge(top);
-    let te = topEdge(bot);
-    return be.join('') == te.join('');
+    return botEdge(top).join('') == topEdge(bot).join('');
 }
 
 function findHorizontalMatch(left, right) {
@@ -213,18 +209,12 @@ function reconstruct(start, tiles, mapping) {
 
 function monsterAt(image, h, v, monster) { 
     for (let i = 0; i < monster.length; ++i) {
-        let line = monster[i];
-        for (let j = 0; j < line.length; ++j) {
-            if (!image[h + i]) return false;
-            let pixel = image[h + i][v + j];
-            if (monster[i][j] == '#' && pixel != '#') {
-                return false;
-            }
+        for (let j = 0; j < monster[i].length; ++j) {
+            if (monster[i][j] == '#' && image[h + i][v + j] != '#') return false;
         }
     }
     for (let i = 0; i < monster.length; ++i) {
-        let line = monster[i];
-        for (let j = 0; j < line.length; ++j) {
+        for (let j = 0; j < monster[i].length; ++j) {
             if (monster[i][j]  == '#') {
                 image[h + i][v + j] = 'O';
             }
