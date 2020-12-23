@@ -35,5 +35,14 @@ function run(file) {
     return [p1.reverse().reduce((a,x, i) => a + x * (i + 1),0),
             p2.reverse().reduce((a,x, i) => a + x * (i + 1),0)]
 }
-
-fs.readFile("input.txt",  'utf8', (_,data) => console.log(run(data)));
+let measure = (f) =>  {
+    return (...arguments) => {
+    var start = new Date()
+    let r = f(...arguments)
+    console.info('Execution time: %dms',  new Date() - start)
+    return r;
+    }
+    
+}
+let measuredRun = measure(run);
+fs.readFile("input.txt",  'utf8', (_,data) => console.log(measuredRun(data)));
