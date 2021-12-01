@@ -11,25 +11,15 @@ fn read_lines(path: &str) -> Vec<String>{
 }
 
 fn calc_3_sums(numbers: &Vec<i64>) -> Vec<i64> {
-    let mut sums =  Vec::new();
-    for i in 0..(numbers.len() - 2) {
-        sums.push(numbers[i] + numbers[i + 1] + numbers[i + 2]);
-    }
-    return sums;
+    numbers.windows(3).map(|x| x[0] + x[1] + x[2]).collect()
  }
 
  fn calc_diff(numbers: &Vec<i64>) -> Vec<i64> {
-    let mut diff =  Vec::new();
-    for idx in 1..(numbers.len()) {
-        diff.push(numbers[idx] - numbers[idx - 1]);
-    }
-    return diff;
+    numbers.windows(2).map(|x| x[1] - x[0]).collect()
  }
 
- fn count_increases(numbers: &Vec<i64>) -> i32 {
-    let mut cnt = 0;
-    numbers.iter().for_each(|x| cnt += (x > &0i64) as i32);
-    return cnt;
+ fn count_increases(numbers: &Vec<i64>) -> usize {
+    numbers.iter().filter(|x| x > &&0i64).count()
  }
 
 fn solve_hard() {
